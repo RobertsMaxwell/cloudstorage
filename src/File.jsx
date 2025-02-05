@@ -31,7 +31,7 @@ function File(props) {
         } else if(props.name[props.name.length - 1] == "/") {
             setType("Folder")
             props.user.getIdToken(false).then(token => {
-                fetch('http://54.87.129.15:3000/files', {
+                fetch('https://54.87.129.15:443/files', {
                     method: "POST",
                     headers: {
                     "Content-Type": "application/json",
@@ -64,7 +64,7 @@ function File(props) {
 
     const deleteFile = () => {
         props.user.getIdToken(false).then(token => {
-            fetch("http://54.87.129.15:3000/delete", {
+            fetch("https://54.87.129.15:443/delete", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -83,7 +83,7 @@ function File(props) {
 
     const downloadFile = async () => {
         props.user.getIdToken(false).then(async token => {
-            fetch(`http://54.87.129.15:3000/download?key=${props.currentKey + props.name}&folder=${type == "Folder" ? "true" : "false"}&token=${token}`, {
+            fetch(`https://54.87.129.15:443/download?key=${props.currentKey + props.name}&folder=${type == "Folder" ? "true" : "false"}&token=${token}`, {
                 method: "GET"
             })
             .then(async res => {

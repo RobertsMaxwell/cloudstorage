@@ -12,9 +12,6 @@ function DeletePopup (props) {
                     <button className="cancel" onClick={() => {props.setDeletePopup(false)}}>Cancel</button>
                     <button className="confirm" onClick={() => {
                         props.deleteFile()
-                        .then(() => {
-                            props.setDeletePopup(false)
-                        })
                     }}>Delete</button>
                 </div>
             </div>

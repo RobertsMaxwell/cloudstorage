@@ -31,7 +31,7 @@ function Front(props) {
 
   const handleNewUser = async (user) => {
     const token = await user.getIdToken()
-    await fetch("http://54.87.129.15:3000/handleNewUser", {
+    await fetch("https://54.87.129.15:443/handleNewUser", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

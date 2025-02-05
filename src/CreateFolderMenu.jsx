@@ -21,7 +21,7 @@ function CreateFolderMenu(props) {
                     <button onClick={() => {
                         if(folderName) {
                             props.user.getIdToken(false).then(token => {
-                                fetch(`http://54.87.129.15:3000/createFolder`, {
+                                fetch(`https://54.87.129.15:443/createFolder`, {
                                     method: "POST",
                                     headers: {
                                         "token": token,

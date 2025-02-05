@@ -16,7 +16,7 @@ function SharePage(props) {
     const navigate = useNavigate()
 
     useEffect(() => {
-        fetch("http://54.87.129.15:3000/getFileHeader", {
+        fetch("https://54.87.129.15:443/getFileHeader", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -33,7 +33,7 @@ function SharePage(props) {
     }, [])
 
     const downloadFile = async () => {
-        fetch(`http://54.87.129.15:3000/downloadPublicFile/?id=files/-${fileID}`, {
+        fetch(`https://54.87.129.15:443/downloadPublicFile/?id=files/-${fileID}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",

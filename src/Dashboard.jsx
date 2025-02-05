@@ -58,7 +58,7 @@ function Dashboard (props) {
 
     const loadFiles = () => {
         props.auth.currentUser.getIdToken(false).then((token) => {
-            fetch("http://54.87.129.15:3000/files", {
+            fetch("https://54.87.129.15:443/files", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

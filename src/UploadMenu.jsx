@@ -56,7 +56,7 @@ function UploadMenu(props) {
                 props.user.getIdToken(false).then(token => {
                     formData.append("token", token);
                     formData.append("key", props.currentKey);
-                    fetch("http://54.87.129.15:3000/upload", {
+                    fetch("https://54.87.129.15:443/upload", {
                         method: "POST",
                         body: formData
                     })
@@ -87,7 +87,7 @@ function UploadMenu(props) {
                         formData.append("paths[]", e.target.files[0].name);
                         formData.append("file", e.target.files[0]);
 
-                        fetch("http://54.87.129.15:3000/upload", {
+                        fetch("https://54.87.129.15:443/upload", {
                             method: "POST",
                             body: formData
                         })
