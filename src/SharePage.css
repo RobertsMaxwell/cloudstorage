@@ -1,0 +1,60 @@
+.sharePage {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.sharePage button:hover {
+    cursor: pointer;
+}
+
+.sharePage .shareHeader {
+    height: 80px;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 0 30px 0 30px;
+    font-size: .9rem;
+}
+
+.sharePage .shareHeader button {
+    margin-left: auto;
+    background-color: white;
+    color: black;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-family: "Roboto";
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.sharePage .fileDisplay {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+    padding-bottom: 50px;
+    box-sizing: border-box;
+}
+
+.sharePage .fileDisplay img {
+    height: 64px;
+}
+
+.sharePage .fileDisplay .fileInfo {
+    display: flex;
+    gap: 10px;
+    font-size: 1.2rem;
+}
+
+.sharePage .fileDisplay button {
+    background-color: white;
+    color: black;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-family: "Roboto";
+    font-size: 1rem;
+    font-weight: 500;
+}

@@ -1,0 +1,113 @@
+.header {
+    display: flex;
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    background-color: transparent;
+    width: 100vw;
+    height: 70px;
+    box-sizing: border-box;
+    padding: 0 21vw 0 21vw;
+    gap: 10px;
+    z-index: 99;
+    border-bottom: 1px solid transparent;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    animation: slide 1s;
+    animation-fill-mode: forwards;
+    font-size: 17px;
+}
+
+.header button {
+    font-size: 15px;
+    font-weight: bold;
+    letter-spacing: .5px;
+}
+
+.header .signup {
+    background-color: rgb(255, 255, 255);
+    color: rgb(32, 32, 32);
+    padding: 0 15px 0 15px;
+    height: 42px;
+    border: none;
+    border-radius: 20px;
+}
+
+.header .signup:hover {
+    cursor: pointer;
+}
+
+.header .signin {
+    background-color: transparent;
+    border: none;
+    color: rgb(236, 236, 236);
+    font-weight: normal;
+    font-size: 15px;
+    letter-spacing: .5px;
+    padding: 10px 14px 10px 14px;
+    border-radius: 25px;
+    margin-left: auto;
+    transition: background-color .1s linear;
+}
+
+.header .signin:hover {
+    cursor: pointer;
+    background-color: rgba(128, 128, 128, 0.3);
+}
+
+.header .account {
+    background-color: rgba(255, 255, 255, 1);
+    color: black;
+    padding: 13px 20px 13px 20px;
+    border-radius: 25px;
+    border: none;
+    margin-left: auto;
+}
+
+.header .account:hover {
+    cursor: pointer;
+}
+
+.animate {
+    animation: border 1s normal;
+    animation-fill-mode: forwards;
+}
+
+.reverse {
+    animation: border .4s reverse;
+    animation-fill-mode: forwards;
+}
+
+.header .menu {
+    margin-left: auto;
+    height: 30px;
+    filter: invert(1);
+}
+
+@media (max-width: 768px) {
+    .header {
+        padding: 0 8vw 0 8vw;
+    }
+}
+
+@keyframes border {
+    from {
+        border-bottom: 1px solid transparent;
+    } 
+    to {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    }
+}
+
+@keyframes slide {
+    from {
+        transform: translateY(-15%);
+        opacity: 0;
+    } 
+    to {
+        transform: translateY(0%);
+        opacity: 1;
+    }
+}

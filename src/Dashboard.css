@@ -1,0 +1,947 @@
+.dashboard {
+    display: flex;
+}
+
+.dashboard .left {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    box-sizing: border-box;
+    padding: 15px;
+    padding-right: 0;
+    width: 270px;
+    flex-shrink: 0;
+}
+
+.dashboard .left h1 {
+    font-size: 1.7rem;
+    text-align: start;
+    padding-left: 20px;
+}
+
+.dashboard .left .folders {
+    display: flex;
+    flex-direction: column;
+    margin-top: 65px;
+}
+
+.dashboard .left .folders .folderSmall .folderName {
+    display: flex;
+    padding: 9px;
+    padding-left: 20px;
+    font-size: .95rem;
+    text-align: left;
+    border-radius: 20px;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    transition: height .5s linear;
+}
+
+.dashboard .left .folders .folderSmall .folderName .clickableFolderName:hover {
+    text-decoration: underline;
+}
+
+.dashboard .left .folders .folderSmall .folderName:hover {
+    cursor: pointer;
+    background-color: rgba(206, 206, 206, 0.05);
+}
+
+.dashboard .left .folders .activeFolder .folderName, .dashboard .left .folders .activeFolder .folderName:hover {
+    background-color: rgba(255, 255, 255, 0.10);
+}
+
+.dashboard .left .folders .folderSmall .homeImage {
+    height: 14px;
+    margin: 0 2px 0 2px;
+    filter: invert(1);
+}
+
+.dashboard .left .folders .folderSmall .driveImage {
+    height: 18px;
+    filter: invert(1);
+}
+
+.dashboard .left .folders .folderSmall .triangle {
+    height: 6px;
+    filter: invert(1);
+    transform: rotate(-90deg);
+    transition: transform .1s linear;
+}
+
+.dashboard .left .folders .folderSmall .open .triangle {
+    transform: rotate(0deg);
+}
+
+.dashboard .left .folders .folderSmall .folderImage {
+    height: 16px;
+    filter: invert(1);
+    opacity: .8;
+}
+
+.dashboard .left .size {
+    display: flex;
+    flex-direction: column;
+    padding-left: 20px;
+    margin-top: 25px;
+    gap: 10px;
+}
+
+.dashboard .left .size .bar {
+    width: 175px;
+    height: 6px;
+    background-color: rgb(26, 26, 26);
+    border-radius: 10px;
+}
+
+.dashboard .left .size .bar_fill {
+    height: 100%;
+    width: 50%;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+}
+
+.dashboard .left .size .size_text {
+    font-size: .92rem;
+    opacity: .9;
+}
+
+/* .folders .topFolder {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px;
+    padding-left: 10px;
+}
+
+.folders .topFolder:hover {
+    cursor: pointer;
+}
+
+.folders .topFolder img {
+    filter: invert(1);   
+}
+
+.folders .topFolder .folderImage {
+    height: 15px;
+}
+
+.folders > .folderSmall {
+    padding-left: 20px;
+}
+
+/* folderSmall */
+/* 
+.folderSmall {
+    display: flex;
+    flex-direction: column;
+    padding-left: 10px;
+    letter-spacing: .5px;
+}
+
+.folderSmall .parent {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px;
+}
+
+.folderSmall img {
+    filter: invert(1);
+    height: 7px;
+    transition: transform .1s linear;
+}
+
+.folderSmall p:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.folderSmall .opened {
+    transform: rotate(90deg);
+}
+
+.folderSmall .parent:hover {
+    background-color: rgb(24, 24, 24);
+    cursor: pointer;
+}  */
+
+/* right */
+
+.dashboard .right {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    overflow: hidden;
+    background-color: rgb(10, 10, 10);
+}
+
+.dashboard .right > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dashboard .right .dashboard_header {
+    display: flex;
+    height: 63px;
+    box-sizing: border-box;
+    padding: 12px;
+    align-items: flex-start;
+    position: relative;
+}
+
+.dashboard .right .dashboard_header .accountButton {
+    position: absolute;
+    right: 25px;
+    top: 10px;
+    height: 28px;
+    width: 28px;
+    padding: 5px;
+    border-radius: 100%;
+}
+
+.dashboard .right .dashboard_header .accountButton:hover {
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+.dashboard .right .dashboard_header .accountButton img {
+    height: 100%;
+    filter: invert(1);
+}
+
+.dashboard .right .dashboard_header .accountButton .accountMenu {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 102%;
+    right: 0;
+    width: 110px;
+    height: 40px;
+    background-color: rgb(31, 30, 30);
+    border-radius: 10px;
+    z-index: 100;
+}
+
+.dashboard .right .dashboard_header .accountButton .accountMenu > div {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dashboard .right .dashboard_header .search {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 500px;
+    height: 100%;
+    margin-right: 60px;
+    margin-left: 60px;
+    border-radius: 50px;
+    border: none;
+    background-color: rgb(24, 24, 24);
+    box-sizing: border-box;
+    outline: none;
+    position: relative;
+}
+
+.dashboard .right .dashboard_header .searchActive {
+    border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+.dashboard .right .dashboard_header .search input {
+    background-color: transparent;
+    height: 100%;
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: .90rem;
+}
+
+.dashboard .right .dashboard_header .search .glass {
+    height: 17px;
+    filter: invert(1);
+    padding: 0 15px 0 15px;
+}
+
+.dashboard .right .dashboard_header .search .close {
+    height: 11px;
+    filter: invert(1);
+    position: absolute;
+    right: 12px;
+    padding: 10px;
+}
+
+.dashboard .right .dashboard_header .search .close:hover {
+    cursor: pointer;
+}
+
+.dashboard .right .functions {
+    display: flex;
+    box-sizing: border-box;
+    padding: 0 30px 10px 30px;
+    gap: 5px;
+    padding-top: 20px;
+    border-radius: 30px 0 0 0;
+}
+
+.dashboard .right .functions .buttons {
+    display: flex;
+    margin-left: auto;
+}
+
+.dashboard .right .functions button {
+    font-family: "Roboto";
+    font-size: .95rem;
+}
+
+.dashboard .right .functions .path img {
+    height: 10px;
+    filter: invert(1);
+    margin-top: 6px;
+}
+
+.dashboard .right .functions .path > div {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.dashboard .right .functions .path > div:last-of-type img {
+    display: none;
+}
+
+
+.dashboard .right .functions .upload {
+    background-color: transparent;
+    padding: 8px 15px 8px 15px;
+    letter-spacing: .5px;
+    border-radius: 20px;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    position: relative;
+}
+
+.dashboard .right .functions .uploadMenu {
+    position: absolute;
+    top: 100%;
+    right: 0px;
+    width: 200px;
+    height: 70px;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(32, 32, 32);
+    border-radius: 2px;
+}
+
+.dashboard .right .functions .uploadMenu .uploadFolder, .dashboard .right .functions .uploadMenu .uploadFile {
+    display: flex;
+    justify-content: flex-start;
+    font-size: .85rem;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding-left: 10px; 
+    box-sizing: border-box;
+    gap: 5px;
+}
+
+.dashboard .right .functions .uploadMenu .uploadFolder:hover, .dashboard .right .functions .uploadMenu .uploadFile:hover {
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.dashboard .right .functions .create {
+    background-color: transparent;
+    padding: 8px 15px 8px 15px;
+    letter-spacing: .5px;
+    border-radius: 20px;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.dashboard .right .functions .createFolderMenuContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.2);
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dashboard .right .functions .createFolderMenuContainer:hover {
+    cursor: default;
+}
+
+.dashboard .right .functions .createFolderMenu {
+    width: 330px;
+    height: 200px;
+    background-color: rgb(22, 22, 22);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-sizing: border-box;
+    padding: 25px 20px 15px 20px;
+    font-size: 1.5rem;
+}
+
+.dashboard .right .functions .createFolderMenu p {
+    align-self: flex-start;
+}
+
+.dashboard .right .functions .createFolderMenu input {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    border: 1px solid white;
+    border-radius: 5px;
+    box-sizing: border-box; 
+    padding-left: 20px;
+    width: 100%;
+    height: 40px;
+    font-size: .95rem;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.dashboard .right .functions .createFolderMenu .buttons {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 5px;
+}
+
+.dashboard .right .functions .createFolderMenu .buttons button {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    font-size: .9rem;
+    border-radius: 20px;
+    padding: 13px 10px 13px 10px;
+}
+
+.dashboard .right .functions .createFolderMenu .buttons button:hover {
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.02);
+}
+
+.dashboard .right .functions .create img {
+    height: 21px;
+    filter: invert(1);
+}
+
+.dashboard .right .functions .create:hover {
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.02);
+}
+
+.dashboard .right .functions .upload:hover {
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.02);
+}
+
+.dashboard .right .functions .upload.activeUploadMenu {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.dashboard .right .functions .upload img:first-of-type {
+    height: 23px;
+    opacity: .9;
+    margin-right: 6px;
+    filter: invert(1);
+}
+
+.dashboard .right .functions .upload img:last-of-type {
+    height: 15px;
+    filter: invert(1);
+}
+
+.dashboard .right .files {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    flex: 1;
+    box-sizing: border-box;
+    padding-left: 35px;
+    padding-right: 20px;
+    padding-bottom: 140px;
+}
+
+.dashboard .right .files .noFiles {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 30vh;
+}
+
+.dashboard .right .files .noFiles h1 {
+    font-size: 1.5rem;
+}
+
+.dashboard .right .files .noFiles p {
+    font-size: 1.1rem;
+    margin-top: 10px;
+}
+
+
+.dashboard .right .functions .path {
+    display: flex;
+    align-items: center;
+    font-size: 1.6rem;
+    font-weight: 500;
+    gap: 5px;
+}
+
+.dashboard .right .functions .path p:hover {
+    cursor: pointer;
+}
+
+/* folder */
+
+.title_file, .file {
+    display: flex;
+    align-items: center;
+}
+
+.title_file {
+    font-size: .9rem;
+    box-sizing: border-box;
+    position: relative;
+    width: 100%;
+    /* border-bottom: 1px solid rgba(255, 255, 255, 0.3); */
+    box-sizing: border-box;
+    padding-bottom: 15px;
+    padding-top: 15px;
+    font-weight: bold;
+}
+
+.file {
+    width: 100%;
+    position: relative;
+    height: 50px;
+    /* border-bottom: 1px solid rgba(255, 255, 255, 0.3); */
+    border-top: 1px solid transparent;
+    font-size: .85rem;
+}
+
+.file::before, .title_file::before {
+    content: "";
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 100%;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.075);
+}
+
+.file:hover {
+    background-color: rgba(255, 255, 255, 0.02);
+}
+
+.file .file_name > div {
+    display: flex;
+    align-items: center;
+}
+
+.file_name {
+    padding-left: 35px;
+    min-width: 150px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.file .file_name {
+    font-size: .95rem;
+    height: 100%;
+}
+
+.file_name img {
+    height: 22px;
+    opacity: .9;
+    margin-right: 20px;
+}
+
+.file_name p {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.file_size, .file_date, .file_type {
+    width: 300px;
+}
+
+.file_options {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 18px;
+    flex-shrink: 0;
+    height: 100%;
+    margin-right: 15px;
+    position: relative;
+}
+
+.file .file_options img {
+    filter: invert(1);
+    transform: rotate(90deg);
+    width: 100%;
+    padding: 6px;
+    border-radius: 100%;
+}
+
+.file .file_options img:hover, .file .file_options .activeFileMenu {
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.file .folder_name:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+
+.file .fileMenu {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    top: 40%;
+    right: calc(100% + 6px);
+    background-color: rgb(32, 32, 32);
+    width: 150px;
+    height: 95px;
+    z-index: 100;
+    border-radius: 5px;
+}
+
+.file .fileMenu button {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    flex: 1;
+    font-size: .75rem;
+}
+
+.file .fileMenu button:hover {
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.file .shareMenu {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    right: calc(100% + 6px);
+    top: 40%;
+    background-color: rgb(27, 27, 27);
+    width: 390px;
+    max-width: 80vw;
+    height: 160px;
+    z-index: 100;
+    box-sizing: border-box;
+    padding: 10px 20px 10px 20px;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.file .shareMenu > div {
+    display: flex;
+    flex: 1;
+}
+
+.file .shareMenu .shareInfo {
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 1rem;
+}
+
+.file .shareMenu .shareInfo p {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.file .shareStatus {
+    height: 7px;
+    width: 7px;
+    border-radius: 100%;
+    background-color: rgb(255, 82, 82);
+    margin-left: 10px;
+    margin-right: 20px;
+    flex-shrink: 0;
+}
+
+.file .shareStatusEmpty {
+    background-color: transparent;
+}
+
+.file .shareMenu .shareStatus {
+    height: 8px;
+    width: 8px;
+}
+
+.file .shareStatusActive {
+    background-color: rgb(86, 252, 135);
+}
+
+.file .shareMenu .shareLink {
+    justify-content: center;
+    align-items: center;
+    font-size: .7rem;
+}
+
+.file .shareMenu .shareLink p {
+    background-color: rgb(13, 13, 13);
+    width: 100%;
+    height: 92%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 25px;
+    margin-bottom: auto;
+}
+
+.file .shareMenu .shareOptions {
+    justify-content: flex-end;
+    align-items: center;
+    gap: 15px;
+}
+
+.file .shareMenu .shareOptions button {
+    background-color: rgb(236, 236, 236);
+    border: none;
+    outline: none;
+    color: black;
+    padding: 7px 9px 7px 9px;
+    border-radius: 4px;
+    font-size: .8rem;
+}
+
+.file .shareMenu .shareOptions button:hover {
+    cursor: pointer;
+}
+
+.file .shareMenu .shareOptions button:first-of-type {
+    background-color: rgb(184, 21, 21);
+    color: white;
+}
+
+.deletePopup {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding: 20px;
+    justify-content: center;
+    width: 390px;
+    height: 180px;
+    background-color: rgb(27, 27, 27);
+    border-radius: 10px;
+}
+
+.deletePopup p {
+    margin-top: auto;
+    margin-bottom: auto;
+    font-size: 1rem;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+}
+
+.deletePopup h1 {
+    font-size: 2rem;
+}
+
+.deletePopup .buttonGroup {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 5px;
+}
+
+.deletePopup .buttonGroup button {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    font-size: .9rem;
+    padding: 7px 15px 7px 15px;
+}
+
+.deletePopup .buttonGroup .confirm {
+    background-color: rgb(247, 47, 47);
+    font-size: 1rem;
+}
+
+.deletePopup .buttonGroup .cancel {
+    border-radius: 20px;
+}
+
+.deletePopup .buttonGroup button:hover {
+    cursor: pointer;
+}
+
+.deletePopup .buttonGroup .cancel:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.loading {
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    background-color: rgb(10, 10, 10);
+}
+
+.loadingEnd {
+    animation: loadingFade .3s linear forwards;
+}
+
+.loader {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    position: relative;
+    animation: rotate 1s linear infinite
+  }
+  .loader::before {
+    content: "";
+    box-sizing: border-box;
+    position: absolute;
+    inset: 0px;
+    border-radius: 50%;
+    border: 2px solid #FFF;
+    animation: prixClipFix 2s linear infinite ;
+  }
+
+  @keyframes rotate {
+    100%   {transform: rotate(360deg)}
+  }
+
+  @keyframes prixClipFix {
+      0%   {clip-path:polygon(50% 50%,0 0,0 0,0 0,0 0,0 0)}
+      25%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 0,100% 0,100% 0)}
+      50%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,100% 100%,100% 100%)}
+      75%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,0 100%,0 100%)}
+      100% {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,0 100%,0 0)}
+  }
+
+@keyframes loadingFade {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .dashboard .left {
+        display: none;
+    }
+
+    .dashboard .right .files {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .dashboard .right .file .file_options {
+        width: 15px;
+    }
+
+    .dashboard .right .file .fileMenu button{
+        font-size: 1.2rem;
+    }
+
+    .file .file_name {
+        font-size: 1.2rem;
+    }
+
+    .dashboard .right .files .file {
+        font-size: 1rem;
+    }
+
+    .dashboard .right .title_file {
+        font-size: 1.2rem;
+    }
+
+    .dashboard .right .functions {
+        flex-direction: column;
+    }
+
+    .dashboard .right .functions .path {
+        font-size: 2rem;
+    }
+
+    .dashboard .right .functions .buttons {
+        margin-right: auto;
+    }
+
+    .dashboard .right .functions .buttons button {
+        font-size: 1.3rem;
+    }
+
+    .dashboard .right .dashboard_header {
+        box-sizing: border-box;
+        gap: 10px;
+        padding: 10px 20px 10px 20px;
+        height: 60px;
+    }
+
+    .dashboard .right .dashboard_header .search {
+        width: 100%;
+        margin: 0;
+    }
+
+    .dashboard .right .dashboard_header .search input {
+        font-size: 1.3rem;
+    }
+
+    .dashboard .right .dashboard_header .accountButton {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: static;
+        height: 100%;
+        width: calc(60px - 20px);
+        top: 0;
+        right: 0;
+        padding: 0;
+        position: relative;
+    }
+
+    .dashboard .right .dashboard_header .accountButton img {
+        height: calc(100% - 3px);
+    }
+
+    .dashboard .right .dashboard_header .accountMenu {
+        font-size: 1.3rem;
+    }
+
+    .dashboard .right .file .shareMenu .shareInfo {
+        font-size: 1.5rem;
+    }
+
+    .dashboard .right .file .shareMenu .shareOptions button {
+        font-size: 1rem;
+    }
+}

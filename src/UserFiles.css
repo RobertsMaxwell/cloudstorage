@@ -1,0 +1,182 @@
+.userFiles {
+    display: flex;
+    height: auto;
+    box-sizing: border-box;
+    padding-top: 80px;
+    min-height: 100vh;
+}
+
+.userFiles > div {
+    display: flex;
+    box-sizing: border-box;
+}
+
+.userFiles .leftInfo {
+    flex-direction: column;
+    align-items: center;
+    width: 16%;
+    border-right: 1px solid rgba(0, 0, 0, 0.4);
+    padding-top: 30px;
+    /* gap: 30px; */
+    /* background-color: red; */
+}
+
+.userFiles .leftInfo .sizeBar {
+    /* border: 1px solid white; */
+    background-color: rgb(59, 59, 59);
+    width: 75%;
+    height: 30px;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-top: 5px;
+}
+
+.userFiles .leftInfo .sizeBar .sizeBarInner {
+    background-color: rgb(91, 91, 255);
+    height: 100%;
+    width: 0%;
+}
+
+.userFiles .leftInfo button {
+    background-color: rgb(60, 60, 255);
+    border: none;
+    height: 50px;
+    width: 55%;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+.userFiles .fileDisplay {
+    flex: 1;
+    /* background-color: blue; */
+    flex-direction: column;
+}
+
+/* file */
+
+.file {
+    border-bottom: 1px solid rgba(136, 136, 136, 0.5);
+    padding-left: 30px;
+    padding-right: 30px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    height: 65px;
+}
+
+.file .fileImage {
+    height: 35px;
+    filter: invert(100%);
+}
+
+.dotMenu {
+    margin-left: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.dotMenu img {
+    height: 20px;
+    filter: invert(100%);
+}
+
+.dotMenu .dropdown {
+    position: absolute;
+    background-color: rgb(71, 71, 71);
+    width: 130px;
+    height: 100px;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px 0 10px 10px;
+    right: 100%;
+    top: 0;
+    box-sizing: border-box;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    overflow: hidden;
+}
+
+.dotMenu .dropdown > p {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    padding-left: 15px;
+    font-size: 15px;
+}
+
+.dotMenu .dropdown > p:hover {
+    background-color: rgb(87, 87, 87);
+}
+
+.file .fileInfo {
+    display: flex;
+    flex-direction: column;
+    font-size: 12px;
+    gap: 3px;
+}
+
+.file .fileInfo .fileName {
+    font-size: 18px;
+}
+
+.dotMenu:hover {
+    cursor: pointer;
+}
+
+/* folder */
+
+.folder {
+    border-bottom: 1px solid rgba(136, 136, 136, 0.5);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.folder .topFolder {
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    gap: 20px;
+    height: 65px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.folder .folderIcon {
+    height: 33px;
+    filter: invert(100%);
+}
+
+.folder .folderArrow {
+    height: 15px;
+    filter: invert(100%);
+}
+
+.folder .folderArrowOpen {
+    transform: rotate(90deg);
+}
+
+.folder .folderItems {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-left: 50px;
+    box-sizing: border-box;
+}
+
+.folder .folderItems > div {
+    border: none;
+}
+
+.folder .folderItems > div:last-of-type {
+    margin-bottom: 10px;
+}

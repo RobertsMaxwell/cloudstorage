@@ -1,0 +1,385 @@
+@import url('https://fonts.googleapis.com/css2?family=Funnel+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  color: white;
+}
+
+html {
+  background-color: rgb(10, 10, 10);
+  font-family: "Funnel Sans";
+}
+
+.uploadPopupContainer, .signInContainer, .emailConfirmationPopupContainer, .deletePopupContainer, .sharePopupContainer {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  backdrop-filter: brightness(.5);
+  top: 0;
+  left: 0;
+  z-index: 100;
+}
+
+.signInPopup {
+    background-color: rgb(10, 10, 10);
+    width: 600px;
+    height: 500px;
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.signInPopup {
+  flex-direction: column;
+  gap: 15px;
+  padding: 50px;
+  box-sizing: border-box;
+}
+
+.signInPopup h1 {
+  margin-bottom: 20px;
+}
+
+.signInPopup .logIn {
+  background-color: rgb(255, 255, 255);
+  border: none;
+  width: 100px;
+  height: 45px;
+  border-radius: 25px;
+  font-size: 16px;
+  color: black;
+  font-weight: bold;
+  letter-spacing: .5px;
+  margin-top: 5px;
+}
+
+.signInPopup input {
+  background-color: rgb(29, 29, 29);
+  border: none;
+  width: 70%;
+  height: 50px;
+  box-sizing: border-box;
+  padding-left: 25px;
+  outline: none;
+  font-size: 16px;
+  border-radius: 20px;
+  outline: 2px solid rgb(20, 20, 20);
+  outline-offset: -4px;
+}
+
+.signInPopup .serviceGroup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 80px;
+}
+
+.signInPopup .serviceGroup .google {
+  height: 55px;
+}
+
+.signInPopup .serviceGroup .github {
+  height: 35px;
+}
+
+.signInPopup .serviceGroup img:hover {
+  cursor: pointer;
+}
+
+.signInPopup .divider {
+  width: 70%;
+  margin: 0;
+  margin-top: 5px;
+}
+
+.signInPopup .exit {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+}
+
+.signInPopup .exit img {
+  filter: invert(1);
+  height: 20px;
+}
+
+.emailConfirmationPopup {
+  background-color: rgb(43, 43, 43);
+  width: 25%;
+  height: 30%;
+  display: flex;
+  justify-content: top;
+  align-items: left;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 30px;
+  gap: 5px;
+}
+
+.emailConfirmationPopup h1 {
+  font-size: 30px;
+  margin-bottom: 5px;
+}
+
+.emailConfirmationPopup p {
+  margin-left: 3px;
+  font-size: 16px;
+}
+
+.emailConfirmationPopup input {
+  background-color: rgb(31, 31, 31);
+  width: 180px;
+  height: 50px;
+  border-radius: 6px;
+  font-size: 40px;
+  box-sizing: border-box;
+  padding-left: 10px;
+  outline: none;
+  border: none;
+  margin-top: 10px;
+}
+
+.emailConfirmationPopup button {
+  background-color: transparent;
+  border: none;
+  margin-top: auto;
+  height: 40px;
+  width: 75px;
+  font-size: 22px;
+}
+
+.emailConfirmationPopup .wrongEmail {
+  font-size: 13px;
+  letter-spacing: .5px;
+  text-decoration: underline;
+}
+
+.uploadPopup {
+  border-radius: 20px;
+  flex-direction: column;
+  gap: 5px;
+  position: relative;
+}
+
+.uploadPopup:after {
+  content: '';
+  border: 2px dashed rgba(255, 255, 255);
+  position: absolute;
+  z-index: 2;
+  border-radius: 20px;
+  width: 87%;
+  height: 87%;
+  pointer-events: none;
+}
+
+.uploadPopup .prompt {
+  font-size: 22px;
+}
+
+.uploadPopup .select:hover {
+  cursor: pointer;
+}
+
+.uploadPopup #file_grab {
+  display: none;
+}
+
+.uploadPopupContainer .dragging {
+  background-color: rgb(51, 51, 51);
+}
+
+.uploadPopupContainer .dragging > * {
+  pointer-events: none;
+}
+
+.uploadPopup .upload {
+  background-color: rgb(60, 60, 255);
+  width: 110px;
+  height: 45px;
+  border: none;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+.deletePopupContainer, .sharePopupContainer {
+  backdrop-filter: brightness(.8);
+}
+
+.sharePopup {
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+  height: 30%;
+  background-color: rgb(43, 43, 43);
+  box-sizing: border-box;
+  padding: 25px;
+  padding-bottom: 50px;
+  padding-top: 20px;
+  gap: 20px;
+}
+
+.sharePopup .title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sharePopup .indicator {
+  background-color: rgb(255, 64, 64);
+  width: 10px;
+  height: 10px;
+  border-radius: 100%;
+}
+
+.sharePopup .indicatorActive {
+  background-color: rgb(45, 207, 72);
+}
+
+.sharePopup .linkGroup {
+  display: flex;
+  gap: 10px;
+  margin-top: auto;
+}
+
+.sharePopup button {
+  background-color: rgb(60, 60, 255);
+  border: none;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 15px;
+  border-radius: 20px;
+}
+
+.sharePopup .link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 19px;
+  border-radius: 20px;
+  height: 50px;
+  width: 100%;
+  background-color: rgb(31, 31, 31);
+}
+
+.sharePopup .buttonGroup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: auto;
+}
+
+.sharePopup .buttonGroup button {
+  background-color: rgb(60, 60, 255);
+  border: none;
+  height: 40px;
+  padding-left: 15px;
+  padding-right: 15px;
+  font-size: 16px;
+  border-radius: 10px;
+}
+
+.sharePopup .buttonGroup button:disabled {
+  background-color: rgb(102, 102, 102);
+}
+
+.menuPopup {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  position: fixed;
+  width: 100vw;
+  height: 100%;
+  background-color: rgb(10, 10, 10);
+  top: 0;
+  z-index: 99;
+  box-sizing: border-box;
+  padding: 25px;
+  padding-top: 90px;
+  gap: 10px;
+  animation: fadeInMenu .15s linear;
+  animation-fill-mode: forwards;
+}
+
+.menuPopup img {
+  position: absolute;
+  right: 0;
+  top: 0;
+  filter: invert(1);
+  height: 18px;
+  padding: 10px;
+  padding-top: 25px;
+  padding-right: 30px;
+}
+
+.menuPopup button {
+  width: 100%;
+  border: none;
+  background-color: white;
+  color: black;
+  height: 50px;
+  font-size: 1.8rem;
+  border-radius: 8px;
+  font-weight: bold;
+  letter-spacing: .5px;
+}
+
+.menuPopup .signIn {
+  background-color: rgb(20, 20, 20);
+  color: white;
+  border: 1px solid white;
+} 
+
+@media (max-width: 768px) {
+  .signInPopup {
+    width: 100%;
+    height: 100%;
+    padding: 30px;
+    border-radius: 0;
+    font-size: 2rem;
+    padding-bottom: 100px;
+  }
+
+  .signInPopup input {
+    width: 100%;
+  }
+
+  .signInPopup .divider {
+    width: 100%;
+  }
+}
+
+.verifyBanner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 45px;
+  background-color: rgb(185, 189, 126);
+  gap: 10px;
+  font-size: 15px;
+  text-align: center;
+}
+
+.verifyBanner p, .verifyBanner u, .verifyBanner i {
+  color: rgb(0, 0, 0);
+}
+
+.verifyBanner .email {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+@keyframes fadeInMenu {
+  0% {
+    opacity: 0;
+  } 
+  100% {
+    opacity: 1;
+  }
+}
