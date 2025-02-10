@@ -306,7 +306,7 @@
 .dashboard .right .functions .path > div {
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 10px;
 }
 
 .dashboard .right .functions .path > div:last-of-type img {
@@ -504,7 +504,7 @@
     align-items: center;
     font-size: 1.6rem;
     font-weight: 500;
-    gap: 5px;
+    gap: 10px;
 }
 
 .dashboard .right .functions .path p:hover {

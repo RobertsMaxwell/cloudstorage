@@ -58,7 +58,7 @@ function Dashboard (props) {
 
     const loadFiles = () => {
         props.auth.currentUser.getIdToken(false).then((token) => {
-            fetch("https://54.87.129.15:443/files", {
+            fetch("https://t19kdqk7ji.execute-api.us-east-1.amazonaws.com/prod/files", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -67,9 +67,11 @@ function Dashboard (props) {
             })
             .then(response => response.json())
             .then(data => {
+                console.log(data)
                 setFiles(data.map(ele => {
                     return {
                         Key: ele.Key,
+
                         LastModified: new Date(ele.LastModified),
                         Size: ele.Size
                     }

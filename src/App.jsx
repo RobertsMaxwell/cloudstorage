@@ -32,7 +32,6 @@ function App () {
     const [phone, setPhone] = useState(false)
 
     useEffect(() => {
-        
         setPhone(window.innerWidth < 768)
 
         window.addEventListener('resize', () => {

@@ -16,7 +16,7 @@ function SharePage(props) {
     const navigate = useNavigate()
 
     useEffect(() => {
-        fetch("https://54.87.129.15:443/getFileHeader", {
+        fetch("https://t19kdqk7ji.execute-api.us-east-1.amazonaws.com/prod/getFileHeader", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -33,7 +33,8 @@ function SharePage(props) {
     }, [])
 
     const downloadFile = async () => {
-        fetch(`https://54.87.129.15:443/downloadPublicFile/?id=files/-${fileID}`, {
+        console.log("starting download")
+        fetch(`https://t19kdqk7ji.execute-api.us-east-1.amazonaws.com/prod/downloadPublicFile?id=files/-${fileID}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -49,6 +50,9 @@ function SharePage(props) {
             a.click()
             document.body.removeChild(a)
             URL.revokeObjectURL(url)
+        })
+        .catch(err => {
+            console.log(err)
         })
         // const zip = new JSZip()
         

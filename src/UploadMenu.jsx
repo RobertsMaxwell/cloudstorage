@@ -56,11 +56,10 @@ function UploadMenu(props) {
                 props.user.getIdToken(false).then(token => {
                     formData.append("token", token);
                     formData.append("key", props.currentKey);
-                    fetch("https://54.87.129.15:443/upload", {
+                    fetch("https://t19kdqk7ji.execute-api.us-east-1.amazonaws.com/prod/upload", {
                         method: "POST",
                         body: formData
                     })
-
                     .then(() => {
                         props.loadFiles()
                     })
@@ -87,7 +86,7 @@ function UploadMenu(props) {
                         formData.append("paths[]", e.target.files[0].name);
                         formData.append("file", e.target.files[0]);
 
-                        fetch("https://54.87.129.15:443/upload", {
+                        fetch("https://t19kdqk7ji.execute-api.us-east-1.amazonaws.com/prod/upload", {
                             method: "POST",
                             body: formData
                         })

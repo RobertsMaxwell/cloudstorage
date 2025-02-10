@@ -30,26 +30,27 @@ function File(props) {
             setType(tempSplit[tempSplit.length - 1])
         } else if(props.name[props.name.length - 1] == "/") {
             setType("Folder")
-            props.user.getIdToken(false).then(token => {
-                fetch('https://54.87.129.15:443/files', {
-                    method: "POST",
-                    headers: {
-                    "Content-Type": "application/json",
-                    "token": `${token}`
-                },
-                body: JSON.stringify({
-                    folder: props.currentKey.replace(`${props.user.uid}/`, "") + props.name
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                let tempSize = 0
-                data.forEach(ele => {
-                    tempSize += ele.Size
-                })
-                setFolderSize(tempSize)
-            })
-        })
+        //     calculate folder size
+        //     props.user.getIdToken(false).then(token => {
+        //         fetch('https://54.87.129.15:443/files', {
+        //             method: "POST",
+        //             headers: {
+        //             "Content-Type": "application/json",
+        //             "token": `${token}`
+        //         },
+        //         body: JSON.stringify({
+        //             folder: props.currentKey.replace(`${props.user.uid}/`, "") + props.name
+        //         })
+        //     })
+        //     .then(response => response.json())
+        //     .then(data => {
+        //         let tempSize = 0
+        //         data.forEach(ele => {
+        //             tempSize += ele.Size
+        //         })
+        //         setFolderSize(tempSize)
+        //     })
+        // })
     }
     get(ref(props.database, `users/${props.user.uid}/shared`))
     .then(data => {
@@ -64,7 +65,7 @@ function File(props) {
 
     const deleteFile = () => {
         props.user.getIdToken(false).then(token => {
-            fetch("https://54.87.129.15:443/delete", {
+            fetch("https://t19kdqk7ji.execute-api.us-east-1.amazonaws.com/prod/delete", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -83,12 +84,10 @@ function File(props) {
 
     const downloadFile = async () => {
         props.user.getIdToken(false).then(async token => {
-            fetch(`https://54.87.129.15:443/download?key=${props.currentKey + props.name}&folder=${type == "Folder" ? "true" : "false"}&token=${token}`, {
+            fetch(`https://t19kdqk7ji.execute-api.us-east-1.amazonaws.com/prod/download?key=${props.currentKey + props.name}&folder=${type == "Folder" ? "true" : "false"}&token=${token}`, {
                 method: "GET"
             })
             .then(async res => {
-
-                console.log("completed")
                 const url = URL.createObjectURL(await res.blob())
                 const a = document.createElement('a');
                 a.href = url;
@@ -124,7 +123,7 @@ function File(props) {
                 <div className={`shareStatus ${shareLink ? "shareStatusActive" : "shareStatusEmpty"}`} />
             </div>
             <p className="file_type">{type}</p>
-            <p className="file_size">{type == "Folder" ? getNeatSize(folderSize) : getNeatSize(props.size)}</p>
+            <p className="file_size">{type == "Folder" ? "--" : getNeatSize(props.size)}</p>
             <p className="file_date">{props.date.toLocaleDateString("en-US", {year: "2-digit", month: "2-digit", day: "2-digit"})}</p>
             <div className={`file_options`}>
                 <img className={`dots ${fileMenu || shareMenu ? "activeFileMenu" : ""}`} ref={dotsRef} src={dots} onClick={() => {
