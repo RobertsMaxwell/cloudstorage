@@ -1,5 +1,5 @@
-import "./Header.css"
-import close from "./assets/close.png"
+import "../styles/Header.css"
+import close from "../assets/close.png"
 
 function MenuPopup (props) {
     return (

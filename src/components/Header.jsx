@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./Header.css"
+import "../styles/Header.css"
 
-import menu from "./assets/menu.png"
+import menu from "../assets/menu.png"
 
 function Header(props) {
     const navigate = useNavigate()

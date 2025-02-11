@@ -1,5 +1,5 @@
-import folderUpload from "./assets/folderUpload.png"
-import fileUpload from "./assets/fileUpload.png"
+import folderUpload from "../assets/folderUpload.png"
+import fileUpload from "../assets/fileUpload.png"
 import { useEffect, useRef } from "react";
 
 function UploadMenu(props) {

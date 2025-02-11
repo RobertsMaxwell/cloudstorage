@@ -1,21 +1,21 @@
 import { useState } from "react";
-import "./Dashboard.css"
-import FolderSmall from "./FolderSmall.jsx"
-import File from "./File.jsx"
-import account from "./assets/account.png"
-import arrowRight from "./assets/right-arrow.png"
-import arrow from "./assets/down-arrow.png"
-import upload from "./assets/upload.png"
-import glass from "./assets/glass.png"
-import create from "./assets/create.png"
-import home from "./assets/home.png"
-import close from "./assets/close.png"
-import homeFilled from "./assets/homeFilled.png"
-import { ListObjectsV2Command, PutObjectCommand } from "@aws-sdk/client-s3"
+import "../styles/Dashboard.css"
+import FolderSmall from "../components/FolderSmall.jsx"
+import File from "../components/File.jsx"
+import account from "../assets/account.png"
+import arrowRight from "../assets/right-arrow.png"
+import arrow from "../assets/down-arrow.png"
+import upload from "../assets/upload.png"
+import glass from "../assets/glass.png"
+import create from "../assets/create.png"
+import home from "../assets/home.png"
+import close from "../assets/close.png"
+import homeFilled from "../assets/homeFilled.png"
 import { useEffect } from "react";
-import CreateFolderMenu from "./CreateFolderMenu.jsx"
-import UploadMenu from "./UploadMenu.jsx"
-import AccountMenu from "./AccountMenu.jsx"
+import CreateFolderMenu from "../components/CreateFolderMenu.jsx"
+import UploadMenu from "../components/UploadMenu.jsx"
+import AccountMenu from "../components/AccountMenu.jsx"
+import { useNavigate } from "react-router-dom"
 
 function Dashboard (props) {
     const [files, setFiles] = useState(null)
@@ -30,6 +30,8 @@ function Dashboard (props) {
     const [search, setSearch] = useState("")
     const [loading, setLoading] = useState(true)
 
+    const nav = useNavigate()
+
     useEffect(() => {
         window.scrollTo(0, 0)
     }, [])
@@ -37,7 +39,11 @@ function Dashboard (props) {
     useEffect(() => {
         if(props.user) {
             setCurrentKey(props.user.uid + "/")
-            loadFiles()
+            if(files == null) {
+                loadFiles()
+            }
+        } else if (!props.loadingAuth) {
+            nav("/")
         }
     }, [props.user])
 
@@ -67,11 +73,9 @@ function Dashboard (props) {
             })
             .then(response => response.json())
             .then(data => {
-                console.log(data)
                 setFiles(data.map(ele => {
                     return {
                         Key: ele.Key,
-
                         LastModified: new Date(ele.LastModified),
                         Size: ele.Size
                     }

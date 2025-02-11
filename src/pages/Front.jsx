@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import "./Front.css"
+import "../styles/Front.css"
 import { createUserWithEmailAndPassword, sendEmailVerification, signInWithPopup, GoogleAuthProvider, GithubAuthProvider } from "firebase/auth";
-import rightArrow from "./assets/right-arrow.png"
-import google from "./assets/google.png"
-import github from "./assets/github.png"
+import rightArrow from "../assets/right-arrow.png"
+import google from "../assets/google.png"
+import github from "../assets/github.png"
 
 function Front(props) {
   const [email, setEmail] = useState("")

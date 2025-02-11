@@ -1,15 +1,15 @@
-import Front from './Front.jsx'
-import Dashboard from "./Dashboard.jsx"
-import Header from "./Header.jsx"
-import SharePage from "./SharePage.jsx"
-import SignInPopup from './SignInPopup.jsx'
-import MenuPopup from "./MenuPopup.jsx"
-import VerifyBanner from "./VerifyBanner.jsx"
-import { useEffect, useState } from 'react';
+import Front from './pages/Front.jsx'
+import Dashboard from "./pages/Dashboard.jsx"
+import Header from "./components/Header.jsx"
+import SharePage from "./pages/SharePage.jsx"
+import SignInPopup from './components/SignInPopup.jsx'
+import MenuPopup from "./components/MenuPopup.jsx"
+import VerifyBanner from "./components/VerifyBanner.jsx"
+import { useEffect, useState, useRef } from 'react';
 import {Routes, Route} from 'react-router-dom'
 import { initializeApp } from 'firebase/app';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import { getDatabase } from 'firebase/database'; 
+import { getDatabase, set } from 'firebase/database'; 
 
 const firebaseConfig = {
     apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -23,12 +23,11 @@ const firebaseConfig = {
 function App () {
     const [signInPopup, setSignInPopup] = useState(false)
     const [menuPopup, setMenuPopup] = useState(false)
-    const [user, setUser] = useState(null)
+    const [user, setUser] = useState(undefined)
+    const [loadingAuth, setLoadingAuth] = useState(true)
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const database = getDatabase(app);
-
-
     const [phone, setPhone] = useState(false)
 
     useEffect(() => {
@@ -43,6 +42,7 @@ function App () {
         })
 
         onAuthStateChanged(auth, user => {
+            setLoadingAuth(false)
             setUser(user)
         })
     }, [])
@@ -71,7 +71,7 @@ function App () {
         <div>
             <Routes>
                 <Route path="/" element={<><Header phone={phone} user={user} setMenuPopup={setMenuPopup} setSignInPopup={setSignInPopup} /><Front database={database} auth={auth} user={user} /></>} />
-                <Route path="/dashboard" element={<><VerifyBanner user={user} /><Dashboard database={database} verified={user?.emailVerified} user={user} auth={auth} phone={phone} /></>} />
+                <Route path="/dashboard" element={<><VerifyBanner user={user} /><Dashboard loadingAuth={loadingAuth} database={database} verified={user?.emailVerified} user={user} auth={auth} phone={phone} /></>} />
                 <Route path="/file/:fileID" element={<SharePage database={database} user={user} />} />
             </Routes>
 

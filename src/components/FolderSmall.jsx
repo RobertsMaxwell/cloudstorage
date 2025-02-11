@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import triangle from "./assets/triangle.png"
-import drive from "./assets/hard-drive.png"
-import folder from "./assets/foldericon.png"
+import triangle from "../assets/triangle.png"
+import drive from "../assets/hard-drive.png"
+import folder from "../assets/foldericon.png"
 
 function FolderSmall (props) {
     const [open, setOpen] = useState(false)

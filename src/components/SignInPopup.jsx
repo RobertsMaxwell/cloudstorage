@@ -2,9 +2,9 @@ import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, Github
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import google from "./assets/google.png"
-import github from "./assets/github.png"
-import close from "./assets/close.png"
+import google from "../assets/google.png"
+import github from "../assets/github.png"
+import close from "../assets/close.png"
 
 function SignInPopup (props) {
     const [email, setEmail] = useState("")
