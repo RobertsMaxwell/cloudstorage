@@ -99,7 +99,7 @@ function Dashboard (props) {
                             <p>Home</p>
                         </div>
                     </div>
-                    <FolderSmall level={1} name="Drive" files={files} masterKey={currentKey} currentKey={currentKey} setCurrentKey={setCurrentKey} />
+                    <FolderSmall level={1} name="Drive" files={files} masterKey={currentKey} currentKey={props.user?.uid + "/"} setCurrentKey={setCurrentKey} />
                 </div>
                 <div className="size">
                     <div className="bar">

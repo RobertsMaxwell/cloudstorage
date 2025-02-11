@@ -48,7 +48,7 @@ function FolderSmall (props) {
                 }}>{props.name ? props.name : nameFromKey}</p>
                 {props.name == "Drive" ? <img src={triangle} className="triangle" /> : ""}
             </div>
-            {open && children ? children.map((ele, i) => <FolderSmall key={i} level={props.level + 1} setCurrentKey={props.setCurrentKey} files={props.files} masterKey={props.masterKey} currentKey={ele.Key} />) : ""}
+            {open && children ? children.map((ele, i) => {return <FolderSmall key={ele.Key} level={props.level + 1} setCurrentKey={props.setCurrentKey} files={props.files} masterKey={props.masterKey} currentKey={ele.Key} />}) : ""}
         </div>
     );
 }
