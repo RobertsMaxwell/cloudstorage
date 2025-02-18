@@ -11,6 +11,7 @@ import txtIcon from "../assets/txtIcon.png"
 import { getNeatSize } from "../pages/Dashboard.jsx"
 import ShareMenu from "./ShareMenu.jsx"
 import { get, ref } from "firebase/database"
+import JSZip from "jszip"
 
 function File(props) {
     const [type, setType] = useState("")
@@ -82,20 +83,73 @@ function File(props) {
     }
 
     const downloadFile = async () => {
+        const lastDownload = localStorage.getItem("lastDownload")
+        if(lastDownload && Date.now() - lastDownload < 3000) {
+            alert("Please wait a few seconds before downloading again")
+            return
+        } else {
+            localStorage.setItem("lastDownload", Date.now())
+        }
+        props.setDownloading(true)
         props.user.getIdToken(false).then(async token => {
+            console.log(props.currentKey)
             fetch(`https://t19kdqk7ji.execute-api.us-east-1.amazonaws.com/prod/download?key=${props.currentKey + props.name}&folder=${type == "Folder" ? "true" : "false"}&token=${token}`, {
                 method: "GET"
             })
-            .then(async res => {
-                const url = URL.createObjectURL(await res.blob())
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = type == "Folder" ? props.name.slice(0, -1) + ".zip" : props.name;
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                URL.revokeObjectURL(url);
+            .then(res => res.json())
+            .then(async data => {
+                if(type == "Folder") {
+                    const zip = new JSZip()
+                    for (const [i, url] of data.urls.entries()) {
+                        const res = await fetch(url)
+                        const blob = await res.blob()
+                        const name = data.keys[i].replace(props.currentKey, "")
+                        console.log(blob)
+                        zip.file(name, blob)
+                    }
+                    const zipBuffer = await zip.generateAsync({type: "blob"})
+                    const url = URL.createObjectURL(zipBuffer)
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = props.name.slice(0, -1) + ".zip";
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                    props.setDownloading(false)
+                } else {
+                    fetch(data.urls[0])
+                    .then(async res => {
+                        const url = URL.createObjectURL(await res.blob())
+                        const a = document.createElement('a');
+                        a.href = url;
+                        a.download = props.name;
+                        document.body.appendChild(a);
+                        a.click();
+                        document.body.removeChild(a);
+                        URL.revokeObjectURL(url);
+                        props.setDownloading(false)
+                    })
+                }
             })
+            .catch(err => {
+                props.setDownloading(false)
+                alert(err)
+            })
+            // fetch(`https://t19kdqk7ji.execute-api.us-east-1.amazonaws.com/prod/download?key=${props.currentKey + props.name}&folder=${type == "Folder" ? "true" : "false"}&token=${token}`, {
+            //     method: "GET"
+            // })
+            // .then(async res => {
+            //     const url = URL.createObjectURL(await res.blob())
+            //     const a = document.createElement('a');
+            //     a.href = url;
+            //     a.download = type == "Folder" ? props.name.slice(0, -1) + ".zip" : props.name;
+            //     document.body.appendChild(a);
+            //     a.click();
+            //     document.body.removeChild(a);
+            //     URL.revokeObjectURL(url);
+            //     props.setDownloading(false)
+            // })
         })
     }
     return (

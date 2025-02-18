@@ -56,7 +56,7 @@ function Front(props) {
         <div className="animWrapper" ref={signUpRef}>
           <div className="title">
             <h1>Sign up now</h1>
-            <p>Get 1 GB of free storage</p>
+            <p>Get 100 MB of free storage</p>
           </div>
           <div className="errorGroup">
             <p className="error">{firstClick ? getErrorMessage("email") : ""}</p>

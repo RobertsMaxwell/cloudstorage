@@ -1,0 +1,47 @@
+.statusIndicator {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    padding: 0 30px;
+    height: 65px;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    background-color: rgb(27, 27, 27);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 17px;
+    border-radius: 5px;
+    font-weight: 500;
+    gap: 10px;
+    animation: popIn .1s ease-in-out forwards;
+}
+
+.statusIndicator .loader {
+    width: 13px;
+    height: 13px;
+    border: 2px solid #FFF;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes popIn {
+    0% {
+        transform: translateY(calc(100% + 20px));
+    } 
+    100% {
+        transform: translateY(0);
+    }
+}

@@ -8,6 +8,7 @@ import txtIcon from "../assets/txtIcon.png"
 import pdfIcon from "../assets/pdfIcon.png"
 import { useEffect, useState } from "react"
 import { getNeatSize } from "./Dashboard"
+import JSZip from "jszip"
 
 function SharePage(props) {
     const { fileID } = useParams()
@@ -28,60 +29,75 @@ function SharePage(props) {
         })
         .then((res) => res.json())
         .then((data) => {
-            setFile({fullKey: data.key, name: data.name, size: data.ContentLength, type: data.type})
+            setFile({fullKey: data.key, name: data.name, size: data.type == "folder" ? data.folderSize : data.ContentLength, type: data.type})
         })
     }, [])
 
     const downloadFile = async () => {
-        console.log("starting download")
+        const lastDownload = localStorage.getItem("lastDownload")
+        if(lastDownload && Date.now() - lastDownload < 3000) {
+            return
+        } else {
+            localStorage.setItem("lastDownload", Date.now())
+        }
         fetch(`https://t19kdqk7ji.execute-api.us-east-1.amazonaws.com/prod/downloadPublicFile?id=files/-${fileID}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
             }
         })
-        .then(async res => {
-            console.log("completed")
-            const url = URL.createObjectURL(await res.blob())
-            const a = document.createElement('a')
-            a.href = url
-            a.download = file.name
-            document.body.appendChild(a)
-            a.click()
-            document.body.removeChild(a)
-            URL.revokeObjectURL(url)
+        .then(res => res.json())
+        .then(async data => {
+            if(file.type == "folder") {
+                const zip = new JSZip()
+                for (const [i, url] of data.urls.entries()) {
+                    const res = await fetch(url)
+                    const blob = await res.blob()
+                    const userId = data.keys[i].slice(0, data.keys[i].indexOf("/") + 1)
+                    const name = data.keys[i].replace(userId, "")
+                    console.log(blob)
+                    zip.file(name, blob)
+                }
+                const zipBuffer = await zip.generateAsync({type: "blob"})
+                const url = URL.createObjectURL(zipBuffer)
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = file.name + ".zip";
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            } else {
+                fetch(data.urls[0])
+                .then(async res => {
+                    const url = URL.createObjectURL(await res.blob())
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = file.name;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                })
+            }
         })
         .catch(err => {
-            console.log(err)
+            alert(err)
         })
-        // const zip = new JSZip()
-        
-        // if(file?.type == "Folder") {
-        //     const findFiles = new ListObjectsV2Command({Bucket: props.bucket, Prefix: file.fullKey})
-        //     const data = await props.client.send(findFiles)
-            
-        //     for(let i = 0; i < data.Contents.length; i++) {
-        //         const getFile = new GetObjectCommand({Bucket: props.bucket, Key: data.Contents[i].Key})
-        //         const fileResult = await props.client.send(getFile)
-                
-        //         let previousKey = file.fullKey.slice(0, file.fullKey.length - 1)
-        //         previousKey = previousKey.slice(0, previousKey.lastIndexOf("/"))
-        //         zip.file(data.Contents[i].Key.replace(`${previousKey}/`, ""), new Blob([await fileResult.Body.transformToByteArray()]))
-        //     }
-
-        //     const completedFile = await zip.generateAsync({type: "blob"})
-        //     const link = document.createElement("a")
-        //     link.href = window.URL.createObjectURL(completedFile)
-        //     link.download = "download.zip"
-        //     document.body.appendChild(link)
-        //     link.dispatchEvent(new MouseEvent("click"))
-        //     document.body.removeChild(link)
-
-        // } else {
-        //     const getFile = new GetObjectCommand({Bucket: props.bucket, Key: file.fullKey})
-        //     const url = await getSignedUrl(props.client, getFile, {expiresIn: 60})
-        //     window.location.href = url
-        // }
+        // .then(async res => {
+        //     console.log("completed")
+        //     const url = URL.createObjectURL(await res.blob())
+        //     const a = document.createElement('a')
+        //     a.href = url
+        //     a.download = file.name
+        //     document.body.appendChild(a)
+        //     a.click()
+        //     document.body.removeChild(a)
+        //     URL.revokeObjectURL(url)
+        // })
+        // .catch(err => {
+        //     console.log(err)
+        // })
     }
 
     return (

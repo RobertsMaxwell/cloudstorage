@@ -15,12 +15,13 @@ import { useEffect } from "react";
 import CreateFolderMenu from "../components/CreateFolderMenu.jsx"
 import UploadMenu from "../components/UploadMenu.jsx"
 import AccountMenu from "../components/AccountMenu.jsx"
+import StatusIndicator from "../components/StatusIndicator.jsx";
 import { useNavigate } from "react-router-dom"
 
 function Dashboard (props) {
     const [files, setFiles] = useState(null)
     const [size, setSize] = useState(0)
-    const maxSize = 1000000000
+    const maxSize = 100000000
 
     const [currentKey, setCurrentKey] = useState(null)
     const [createFolderMenu, setCreateFolderMenu] = useState(false)
@@ -29,6 +30,9 @@ function Dashboard (props) {
     const [fileSubset, setFileSubset] = useState([])
     const [search, setSearch] = useState("")
     const [loading, setLoading] = useState(true)
+    const [downloading, setDownloading] = useState(false)
+    const [uploading, setUploading] = useState(false)
+    const [order, setOrder] = useState(null)
 
     const nav = useNavigate()
 
@@ -85,6 +89,25 @@ function Dashboard (props) {
                 console.log(err)
             })
         })
+    }
+
+    const sortingFunction = (a, b) => {
+        switch (order) {
+            case "nameDown":
+                return a.Key.replace(`${currentKey}`, "").localeCompare(b.Key.replace(`${currentKey}`, ""))
+            case "nameUp":
+                return b.Key.replace(`${currentKey}`, "").localeCompare(a.Key.replace(`${currentKey}`, ""))
+            case "sizeDown":
+                return a.Size - b.Size
+            case "sizeUp":
+                return b.Size - a.Size
+            case "dateDown":
+                return a.LastModified - b.LastModified
+            case "dateUp":
+                return b.LastModified - a.LastModified
+            default:
+                return
+        }
     }
 
     return (
@@ -155,19 +178,19 @@ function Dashboard (props) {
                             <img src={upload} />
                             Upload
                             <img src={arrow} />
-                            {uploadMenu ? <UploadMenu loadFiles={loadFiles} setUploadMenu={setUploadMenu} user={props.user} client={props.client} bucket={props.bucket} currentKey={currentKey} size={size} maxSize={maxSize}/> : ""}
+                            {uploadMenu ? <UploadMenu setUploading={setUploading} loadFiles={loadFiles} setUploadMenu={setUploadMenu} user={props.user} client={props.client} bucket={props.bucket} currentKey={currentKey} size={size} maxSize={maxSize}/> : ""}
                         </button>
                     </div>
                 </div>
                 <div className="files">
                     <div className="title_file">
-                        <p className="file_name">Name</p>
+                        <p className="file_name" onClick={() => {order == "nameDown" ? setOrder("nameUp") : setOrder("nameDown")}}>Name</p>
                         <p className="file_type">Type</p>
-                        <p className="file_size">Size</p>
-                        <p className="file_date">Date added</p>
+                        <p className="file_size" onClick={() => {order == "sizeDown" ? setOrder("sizeUp") : setOrder("sizeDown")}}>Size</p>
+                        <p className="file_date" onClick={() => {order == "dateDown" ? setOrder("dateUp") : setOrder("dateDown")}}>Date added</p>
                         <div className="file_options" />
                     </div>
-                    {fileSubset ? fileSubset.filter(ele => {return search ? ele.Key.replace(`${currentKey}`, "").toLowerCase().includes(search.toLowerCase()) : true}).map((ele, i) => <File loadFiles={loadFiles} user={props.user} database={props.database} client={props.client} bucket={props.bucket} date={ele.LastModified} key={ele.Key} name={ele.Key.replace(`${currentKey}`, "")} size={ele.Size} currentKey={currentKey} setCurrentKey={setCurrentKey} />) : ""}
+                    {fileSubset ? fileSubset.filter(ele => {return search ? ele.Key.replace(`${currentKey}`, "").toLowerCase().includes(search.toLowerCase()) : true}).sort(sortingFunction).map((ele, i) => <File setDownloading={setDownloading} loadFiles={loadFiles} user={props.user} database={props.database} client={props.client} bucket={props.bucket} date={ele.LastModified} key={ele.Key} name={ele.Key.replace(`${currentKey}`, "")} size={ele.Size} currentKey={currentKey} setCurrentKey={setCurrentKey} />) : ""}
                     {fileSubset?.length == 0 ? <div className="noFiles">
                         <h1>No Files or Folders found in <i>{currentKey?.replace(`${props.user.uid}/`, "Drive/")}</i></h1>
                         <p>Try uploading a file or creating a folder</p>
@@ -176,8 +199,9 @@ function Dashboard (props) {
             </div>
         </div>
         <div className={`loading ${loading ? "" : "loadingEnd"}`}>
-            <span className="loader"></span>
+            <span className="dashboard_loader"></span>
         </div>
+        {downloading || uploading ? <StatusIndicator text={downloading ? "Downloading" : "Uploading"} /> : ""}
     </>
     );
 }
