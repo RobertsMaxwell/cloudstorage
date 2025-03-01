@@ -190,7 +190,7 @@ function Dashboard (props) {
                         <p className="file_date" onClick={() => {order == "dateDown" ? setOrder("dateUp") : setOrder("dateDown")}}>Date added</p>
                         <div className="file_options" />
                     </div>
-                    {fileSubset ? fileSubset.filter(ele => {return search ? ele.Key.replace(`${currentKey}`, "").toLowerCase().includes(search.toLowerCase()) : true}).sort(sortingFunction).map((ele, i) => <File setDownloading={setDownloading} loadFiles={loadFiles} user={props.user} database={props.database} client={props.client} bucket={props.bucket} date={ele.LastModified} key={ele.Key} name={ele.Key.replace(`${currentKey}`, "")} size={ele.Size} currentKey={currentKey} setCurrentKey={setCurrentKey} />) : ""}
+                    {fileSubset ? fileSubset.filter(ele => {return search ? ele.Key.replace(`${currentKey}`, "").toLowerCase().includes(search.toLowerCase()) : true}).sort(sortingFunction).map((ele, i) => <File downloading={downloading} setDownloading={setDownloading} loadFiles={loadFiles} user={props.user} database={props.database} client={props.client} bucket={props.bucket} date={ele.LastModified} key={ele.Key} name={ele.Key.replace(`${currentKey}`, "")} size={ele.Size} currentKey={currentKey} setCurrentKey={setCurrentKey} />) : ""}
                     {fileSubset?.length == 0 ? <div className="noFiles">
                         <h1>No Files or Folders found in <i>{currentKey?.replace(`${props.user.uid}/`, "Drive/")}</i></h1>
                         <p>Try uploading a file or creating a folder</p>

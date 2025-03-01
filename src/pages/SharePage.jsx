@@ -9,10 +9,12 @@ import pdfIcon from "../assets/pdfIcon.png"
 import { useEffect, useState } from "react"
 import { getNeatSize } from "./Dashboard"
 import JSZip from "jszip"
+import { set } from "firebase/database"
 
 function SharePage(props) {
     const { fileID } = useParams()
     const [file, setFile] = useState(null)
+    const [downloading, setDownloading] = useState(false)
 
     const navigate = useNavigate()
 
@@ -37,9 +39,14 @@ function SharePage(props) {
         const lastDownload = localStorage.getItem("lastDownload")
         if(lastDownload && Date.now() - lastDownload < 3000) {
             return
+        }
+        else if(downloading) {
+            alert("Download already in progress")
+            return
         } else {
             localStorage.setItem("lastDownload", Date.now())
         }
+        setDownloading(true)
         fetch(`https://t19kdqk7ji.execute-api.us-east-1.amazonaws.com/prod/downloadPublicFile?id=files/-${fileID}`, {
             method: "GET",
             headers: {
@@ -78,11 +85,13 @@ function SharePage(props) {
                     a.click();
                     document.body.removeChild(a);
                     URL.revokeObjectURL(url);
+                    setDownloading(false)
                 })
             }
         })
         .catch(err => {
             alert(err)
+            setDownloading(false)
         })
         // .then(async res => {
         //     console.log("completed")

@@ -87,6 +87,9 @@ function File(props) {
         if(lastDownload && Date.now() - lastDownload < 3000) {
             alert("Please wait a few seconds before downloading again")
             return
+        } else if(props.downloading) {
+            alert("Download already in progress")
+            return
         } else {
             localStorage.setItem("lastDownload", Date.now())
         }
