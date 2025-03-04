@@ -30,27 +30,6 @@ function File(props) {
             setType(tempSplit[tempSplit.length - 1])
         } else if(props.name[props.name.length - 1] == "/") {
             setType("Folder")
-        //     calculate folder size
-        //     props.user.getIdToken(false).then(token => {
-        //         fetch('https://54.87.129.15:443/files', {
-        //             method: "POST",
-        //             headers: {
-        //             "Content-Type": "application/json",
-        //             "token": `${token}`
-        //         },
-        //         body: JSON.stringify({
-        //             folder: props.currentKey.replace(`${props.user.uid}/`, "") + props.name
-        //         })
-        //     })
-        //     .then(response => response.json())
-        //     .then(data => {
-        //         let tempSize = 0
-        //         data.forEach(ele => {
-        //             tempSize += ele.Size
-        //         })
-        //         setFolderSize(tempSize)
-        //     })
-        // })
     }
     get(ref(props.database, `users/${props.user.uid}/shared`))
     .then(data => {
@@ -155,7 +134,17 @@ function File(props) {
             // })
         })
     }
+
+    const checkIfBeingSwitched = () => {
+        let tempName = props.name
+        if(props.name[props.name.length - 1] == "/") {
+            tempName = tempName.slice(0, -1)
+        }
+        return tempName.includes("/")
+    }
+
     return (
+        checkIfBeingSwitched() ? "" :
         <div className="file">
             <div className="file_name" onDoubleClick={() => {
                 if(type == "Folder") {

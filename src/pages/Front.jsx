@@ -5,6 +5,7 @@ import { createUserWithEmailAndPassword, sendEmailVerification, signInWithPopup,
 import rightArrow from "../assets/right-arrow.png"
 import google from "../assets/google.png"
 import github from "../assets/github.png"
+import UsageExample from '../components/UsageExample';
 
 function Front(props) {
   const [email, setEmail] = useState("")
@@ -49,9 +50,11 @@ function Front(props) {
           <button onClick={() => {
             const element = document.querySelector(".animWrapper")
             element.scrollIntoView({behavior: "smooth", block: "center"})
-          }}>Get Started <img src={rightArrow} /></button>
+          // }}>Get Started</button>
+          }}>Key Features<img src={rightArrow} /></button>
         </div>
       </div>
+      <UsageExample />
       <div className="account">
         <div className="animWrapper" ref={signUpRef}>
           <div className="title">

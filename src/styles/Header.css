@@ -13,15 +13,15 @@
     gap: 10px;
     z-index: 99;
     border-bottom: 1px solid transparent;
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     animation: slide 1s;
     animation-fill-mode: forwards;
     font-size: 17px;
 }
 
 .header button {
-    font-size: 15px;
+    font-size: 14px;
     font-weight: bold;
     letter-spacing: .5px;
 }
@@ -29,8 +29,7 @@
 .header .signup {
     background-color: rgb(255, 255, 255);
     color: rgb(32, 32, 32);
-    padding: 0 15px 0 15px;
-    height: 42px;
+    padding: 12px 15px;
     border: none;
     border-radius: 20px;
 }
