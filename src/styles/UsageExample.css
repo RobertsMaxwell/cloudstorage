@@ -57,11 +57,15 @@
 }
 
 @media (max-width: 1000px) {
+    .front .usageExample {
+        margin-bottom: 200px;
+    }
+
     .front .usageExample .features {
         flex-direction: column;
         height: auto;
         width: 80%;
-        margin-bottom: 100px;
+        /* margin-bottom: 100px; */
         gap: 20px;
         margin-top: 30px;
     }
