@@ -29,7 +29,7 @@
     animation: slideTitle 1s;
     animation-delay: 0.1s;
     animation-fill-mode: forwards;
-    padding: 0 22vw 0 22vw;
+    padding: 0 25vw 0 25vw;
     box-sizing: border-box;
     width: 100%;
     line-height: 1;
@@ -50,9 +50,9 @@
     background-color: white;
     color: black;
     border: none;
-    padding: 15px 25px;
+    padding: 18px 25px;
     border-radius: 30px;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: bold;
     margin-top: 50px;
     margin-bottom: 50px;
