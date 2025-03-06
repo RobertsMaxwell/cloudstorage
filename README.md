@@ -1,6 +1,6 @@
 ## Cloud Storage
 
-#### File storage service that allows you to upload, store, and share your files
+#### File storage service that allows you to upload, download, and share your files
 
 ##### https://s3cloudstorage.web.app
 
