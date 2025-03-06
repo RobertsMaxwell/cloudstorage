@@ -17,6 +17,7 @@ function Front(props) {
   const [firstClick, setFirstClick] = useState(false)
 
   const signUpRef = useRef(null)
+  const featuresRef = useRef(null)
 
   useEffect(() => {
     const observer = new IntersectionObserver(entries => {
@@ -28,6 +29,7 @@ function Front(props) {
     }, {threshold: .4})
     
     observer.observe(signUpRef.current)
+    observer.observe(featuresRef.current)
   }, [])
 
   const handleNewUser = async (user) => {
@@ -48,13 +50,13 @@ function Front(props) {
           <h1>Store and share</h1>
           <p>Securely store your files on Amazon S3</p>
           <button onClick={() => {
-            const element = document.querySelector(".animWrapper")
+            const element = document.querySelector(".usageExample")
             element.scrollIntoView({behavior: "smooth", block: "center"})
           // }}>Get Started</button>
           }}>Key Features<img src={rightArrow} /></button>
         </div>
       </div>
-      <UsageExample />
+      <UsageExample refProps={featuresRef} />
       <div className="account">
         <div className="animWrapper" ref={signUpRef}>
           <div className="title">

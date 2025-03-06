@@ -8,11 +8,11 @@ import folderStructure from "../assets/folderIcon.png"
 import uploadIcon from "../assets/upload.png"
 import shareIcon from "../assets/send.png"
 
-function UsageExample () {
+function UsageExample (props) {
     const [selected, setSelected] = useState(0)
     
     return (
-        <div className="usageExample">
+        <div className="usageExample" ref={props.refProps}>
             <p className="title">Free File Storage</p>
             <p className="desc">Personal file storage service created by <a href="https://github.com/RobertsMaxwell" target="_blank" rel="noreferrer">github.com/RobertsMaxwell</a> that allows you to upload and store your files in the cloud.</p>
             <div className="features">
